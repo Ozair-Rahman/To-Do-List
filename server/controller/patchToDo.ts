@@ -1,0 +1,1 @@
+export const patchToDo = (req:any, res:any) => res.send(`Updating To Do With ID:${req.params.id}`)

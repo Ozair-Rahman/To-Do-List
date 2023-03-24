@@ -1,0 +1,1 @@
+export const getToDo = (req:any, res:any) => res.send('Getting To Dos...');
