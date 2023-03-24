@@ -12,5 +12,4 @@ const app = express();
 app.use(router);
 app.use(cors());
 
-
 app.listen(PORT, () => console.log(`Running on PORT:${PORT}`));
