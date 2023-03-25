@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import EditToDo from "./components/edit-todo-component/page";
 
 export default function Home() {
 
   // States
   const [toDos, setToDos] = useState<string[]>([]);
   const [newToDo, setNewToDo] = useState<string>("");
-  const [editToggle, setEditToggle] = useState<boolean>(false);
 
   // Render ToDos on Initial Render
   useEffect(() => {
@@ -25,11 +23,9 @@ export default function Home() {
         {toDos.map((item, key) => {
           return (
             <div key={key}>
-              <input type="checkbox" />
+              <input type="radio" />
               <h2>{item.ToDo}</h2>
               <button onClick={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)}>Delete</button>
-              <button onClick={() => setEditToggle(!editToggle)}>Edit</button>
-              {editToggle && <EditToDo />}
               <br />
             </div>
           )
