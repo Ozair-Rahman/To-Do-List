@@ -1,5 +1,7 @@
 'use client'; // Use React Client Side Components to Use useEffect & useState
 
+import './globals.css';
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -14,18 +16,17 @@ export default function Home() {
     axios.get('http://localhost:5000/getToDo')
     .then((response) => setToDos(response.data));
   }
-  ,[]);
+  ,);
 
   return (
-    <main>
+    <main className='test3'>
       <h1>To Do List</h1>
       <div className="renderToDos">
         {toDos.map((item, key) => {
           return (
-            <div key={key}>
-              <input type="radio" />
-              <h2>{item.ToDo}</h2>
-              <button onClick={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)}>Delete</button>
+            <div key={key} className='test4'>
+              <input type="radio" className='test2' onChange={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)} />
+              <p className="test">{item.ToDo}</p>
               <br />
             </div>
           )

@@ -1,0 +1,20 @@
+.test {
+    display: inline;
+}
+
+.test2 {
+    display: inline;
+}
+
+.test3 {
+    display: grid;
+    place-content: center;
+}
+
+.createToDo {
+    margin-top: 1rem;
+}
+
+.test4 {
+    padding: .5rem;
+}
