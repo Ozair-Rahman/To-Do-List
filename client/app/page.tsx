@@ -7,9 +7,9 @@ import EditToDo from "./components/edit-todo-component/page";
 export default function Home() {
 
   // States
-  const [toDos, setToDos] = useState([]);
-  const [newToDo, setNewToDo] = useState("");
-  const [editToggle, setEditToggle] = useState(false);
+  const [toDos, setToDos] = useState<string[]>([]);
+  const [newToDo, setNewToDo] = useState<string>("");
+  const [editToggle, setEditToggle] = useState<boolean>(false);
 
   // Render ToDos on Initial Render
   useEffect(() => {
