@@ -1,90 +1,43 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+'use client'; // Use React Client Side Components to Use useEffect & useState
 
-const inter = Inter({ subsets: ['latin'] })
+import { useEffect, useState } from "react";
+import axios from "axios";
+import EditToDo from "./components/edit-todo-component/page";
 
 export default function Home() {
+
+  // States
+  const [toDos, setToDos] = useState([]);
+  const [newToDo, setNewToDo] = useState("");
+  const [editToggle, setEditToggle] = useState(false);
+
+  // Render ToDos on Initial Render
+  useEffect(() => {
+    axios.get('http://localhost:5000/getToDo')
+    .then((response) => setToDos(response.data));
+  }
+  ,[]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main>
+      <h1>To Do List</h1>
+      <div className="renderToDos">
+        {toDos.map((item, key) => {
+          return (
+            <div key={key}>
+              <input type="checkbox" />
+              <h2>{item.ToDo}</h2>
+              <button onClick={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)}>Delete</button>
+              <button onClick={() => setEditToggle(!editToggle)}>Edit</button>
+              {editToggle && <EditToDo />}
+              <br />
+            </div>
+          )
+        })}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="createToDo">
+        <input type="text" placeholder="New To Do..." onChange={(e) => setNewToDo(e.target.value)} />
+        <button onClick={() => axios.post('http://localhost:5000/createToDo', { ToDo: newToDo })}>Submit</button>
       </div>
     </main>
   )
