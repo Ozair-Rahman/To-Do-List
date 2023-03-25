@@ -1,3 +1,4 @@
+// Import Dependencies
 require('dotenv').config();
 const express = require('express')
 const mongoose = require("mongoose");
@@ -9,7 +10,11 @@ import {router} from './routes/routes';
 const app = express();
 
 // Middleware
+app.use(express.json());
 app.use(router);
 app.use(cors());
+
+// Connect to MongoDB Database
+mongoose.connect(`${process.env.MONGOOSE_API_KEY}`);
 
 app.listen(PORT, () => console.log(`Running on PORT:${PORT}`));
