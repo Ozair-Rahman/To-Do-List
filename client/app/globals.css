@@ -1,12 +1,12 @@
-.test {
+.toDo {
     display: inline;
 }
 
-.test2 {
+.toDoRadioBtn {
     display: inline;
 }
 
-.test3 {
+.container {
     display: grid;
     place-content: center;
 }
@@ -15,6 +15,6 @@
     margin-top: 1rem;
 }
 
-.test4 {
+.renderToDo {
     padding: .5rem;
 }

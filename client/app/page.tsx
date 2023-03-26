@@ -19,14 +19,14 @@ export default function Home() {
   ,);
 
   return (
-    <main className='test3'>
+    <main className='container'>
       <h1>To Do List</h1>
-      <div className="renderToDos">
+      <div>
         {toDos.map((item, key) => {
           return (
-            <div key={key} className='test4'>
-              <input type="radio" className='test2' onChange={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)} />
-              <p className="test">{item.ToDo}</p>
+            <div key={key} className='renderToDo'>
+              <input type="radio" className='toDoRadioBtn' onChange={() => axios.delete(`http://localhost:5000/delToDo/${item._id}`)} />
+              <p className="toDo">{item.ToDo}</p>
               <br />
             </div>
           )
